@@ -12,26 +12,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Extract branch name from merge commit
-        id: extract-branch
-        run: |
-          COMMIT_MSG="${{ github.event.head_commit.message }}" 
-          BRANCH_NAME=$(echo "$COMMIT_MSG" | grep -oP 'from [^/]+/\K[^\s]+' | head -1)
-          
-          if [ -z "$BRANCH_NAME" ]; then
-            echo "Could not extract branch name from commit message"
-            exit 1
-          fi
-          
-          echo "Extracted branch name: $BRANCH_NAME"
-          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
-          
       - name: Create and push tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          BRANCH_NAME="${{ steps.extract-branch.outputs.branch_name }}"
-          TAG_NAME="$BRANCH_NAME"
+          BRANCH_NAME=${{ github.event.pull_request.head.ref }}
+          TAG_NAME="${BRANCH_NAME##*/ }"
           
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
             echo "Tag $TAG_NAME already exists"
