@@ -17,7 +17,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           BRANCH_NAME=${{ github.event.pull_request.head.ref }}
-          TAG_NAME="${BRANCH_NAME##*/ }"
+          TAG_NAME="${BRANCH_NAME##*/}"
           
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
             echo "Tag $TAG_NAME already exists"
