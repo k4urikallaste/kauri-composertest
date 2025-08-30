@@ -6,4 +6,6 @@ namespace Kauri\KauriComposertest;
 class FooBar
 {
     public string $foo = 'bar';
+
+    public string $version = "1.1";
 }
