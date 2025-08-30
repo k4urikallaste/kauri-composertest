@@ -7,5 +7,5 @@ class FooBar
 {
     public string $foo = 'bar';
 
-    public string $version = "1.2";
+    public string $version = "1.3.1";
 }
