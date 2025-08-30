@@ -1,0 +1,17 @@
+{
+    "name": "kauri/kauri-composertest",
+    "autoload": {
+        "psr-4": {
+            "Kauri\\KauriComposertest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "KauriKallaste",
+            "email": "kauri.kallaste@opus.ee"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    }
+}
